@@ -70,9 +70,9 @@ def show_missing_instructions() -> None:
 
 
 def analyze_matrix_data() -> None:
-    import numpy as np
-    import pandas as pd
-    import matplotlib.pyplot as plt
+    import numpy as np  # type: ignore
+    import pandas as pd  # type: ignore
+    import matplotlib.pyplot as plt  # type: ignore
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_file = os.path.join(script_dir, "matrix_analysis.png")
