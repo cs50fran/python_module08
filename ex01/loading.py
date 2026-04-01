@@ -1,3 +1,4 @@
+import os
 import sys
 import importlib
 
@@ -69,17 +70,33 @@ def show_missing_instructions() -> None:
 
 
 def analyze_matrix_data() -> None:
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
 
-    output_file = "matrix_analysis.png"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_file = os.path.join(script_dir, "matrix_analysis.png")
 
     print()
     print("Analyzing Matrix data...")
 
-    # Simulate 1000 Matrix data point
     n_points = 1000
     print(f"Processing {n_points} data points...")
 
+    data = np.random.randn(n_points)
+    np.random.uniform(0, 1000, n_points)
+    data_frame = pd.DataFrame(data, columns=["signal"])
+
+    total = data_frame["signal"].sum()
+    print(f"  Sum: {total:.4f}")
     print("Generating visualization...")
+
+    data_frame["signal"].plot(title=f"Matrix Signal (sum={total:.4f})")
+    plt.axhline(total, color="red", linestyle="--", label=f"Sum: {total:.4f}")
+    plt.legend()
+    plt.savefig(output_file)
+    plt.close()
+
     print()
     print("Analysis complete!")
     print(f"Results saved to: {output_file}")
